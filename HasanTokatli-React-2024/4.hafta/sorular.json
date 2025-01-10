@@ -1,0 +1,55 @@
+{
+    "questions": [
+      {
+        "question": "Türkiye'nin başkenti neresidir?",
+        "options": ["İstanbul", "Ankara", "İzmir", "Bursa"],
+        "answer": "Ankara"
+      },
+      {
+        "question": "En küçük asal sayı hangisidir?",
+        "options": ["0", "1", "2", "3"],
+        "answer": "2"
+      },
+      {
+        "question": "Ay hangi gezegenin uydusudur?",
+        "options": ["Venüs", "Mars", "Dünya", "Satürn"],
+        "answer": "Dünya"
+      },
+      {
+        "question": "Hangi renk, mavi ve sarının karışımından oluşur?",
+        "options": ["Yeşil", "Turuncu", "Mor", "Kahverengi"],
+        "answer": "Yeşil"
+      },
+      {
+        "question": "İnsan vücudunda kaç tane kemik vardır?",
+        "options": ["206", "208", "210", "212"],
+        "answer": "206"
+      },
+      {
+        "question": "En büyük gezegen hangisidir?",
+        "options": ["Dünya", "Jüpiter", "Satürn", "Mars"],
+        "answer": "Jüpiter"
+      },
+      {
+        "question": "Çanakkale Savaşı hangi yılda gerçekleşmiştir?",
+        "options": ["1914", "1915", "1916", "1917"],
+        "answer": "1915"
+      },
+      {
+        "question": "Dünyanın en uzun nehri hangisidir?",
+        "options": ["Amazon", "Nil", "Yangtze", "Mississippi"],
+        "answer": "Nil"
+      },
+      {
+        "question": "Hangisi bir programlama dili değildir?",
+        "options": ["Python", "Java", "HTML", "C++"],
+        "answer": "HTML"
+      },
+      {
+        "question": "Türkiye'nin en yüksek dağı hangisidir?",
+        "options": ["Ağrı Dağı", "Erciyes", "Kaçkar Dağları", "Uludağ"],
+        "answer": "Ağrı Dağı"
+      }
+    ]
+  }
+  

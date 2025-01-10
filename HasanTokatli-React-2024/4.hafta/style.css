@@ -1,0 +1,8 @@
+#zaman {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+
+    padding:  1rem;
+    border: 2px solid green;
+}
