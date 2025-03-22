@@ -1,0 +1,81 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: example/instagram:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - JDBC_DATABASE_URL=jdbc:postgresql://postgres:5432/instagram
+      - JDBC_DATABASE_USERNAME=postgres
+      - JDBC_DATABASE_PASSWORD=password
+      - CASSANDRA_CONTACT_POINTS=cassandra
+      - CASSANDRA_PORT=9042
+      - CASSANDRA_LOCAL_DC=datacenter1
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - AWS_S3_ENDPOINT=http://fake-s3:4566
+      - AWS_S3_BUCKET=my-fake-bucket
+      - CDN_BASE_URL=http://fake-cdn:8081/cdn
+    depends_on:
+      - postgres
+      - cassandra
+      - kafka
+  postgres:
+    image: bitnami/postgresql:latest
+    environment:
+      - POSTGRESQL_DATABASE=instagram
+      - POSTGRESQL_USERNAME=postgres
+      - POSTGRESQL_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/bitnami/postgresql
+  cassandra:
+    image: cassandra:latest
+    container_name: cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=instagram_cluster
+      - CASSANDRA_KEYSPACE=instagram_keyspace
+      - CASSANDRA_LOCAL_DC=datacenter1
+    ports:
+      - "9042:9042"
+  kafka:
+    image: bitnami/kafka:latest
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    ports:
+      - "2181:2181"
+  fake-s3:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ROOT_USER=minio
+      - MINIO_ROOT_PASSWORD=minio123
+    ports:
+      - "4566:4566"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+  fake-cdn:
+    image: nginx:alpine
+    ports:
+      - "8081:80"
+    volumes:
+      - ./cdn-content:/usr/share/nginx/html:ro
+
+volumes:
+  pgdata:
+  minio_data:

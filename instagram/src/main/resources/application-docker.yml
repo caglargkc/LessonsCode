@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: instagram
+
+  datasource:
+    url: ${JDBC_DATABASE_URL:jdbc:postgresql://postgres:5432/instagram}
+    username: ${JDBC_DATABASE_USERNAME:postgres}
+    password: ${JDBC_DATABASE_PASSWORD:password}
+  jpa:
+    hibernate:
+      ddl-auto: update         # Entity tabanlı tablo oluşturma, update, create, create-drop seçenekleri mevcut.
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  cassandra:
+    contact-points: ${CASSANDRA_CONTACT_POINTS:cassandra}
+    port: ${CASSANDRA_PORT:9042}
+    keyspace-name: instagram_keyspace
+    schema-action: create-if-not-exists  # Cassandra'da otomatik şema oluşturma
+
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
+    consumer:
+      group-id: instagram-group
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+aws:
+  s3:
+    endpoint: ${AWS_S3_ENDPOINT:http://fake-s3:4566}
+    bucket: ${AWS_S3_BUCKET:my-fake-bucket}
+
+cdn:
+  base-url: ${CDN_BASE_URL:http://fake-cdn:8081/cdn}
+
